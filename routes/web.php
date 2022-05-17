@@ -1,6 +1,8 @@
 <?php
 
+use App\Mail\NewPost;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/websites');
+Route::view('/websites', 'websites.index')->name('websites');
+Route::get('/websites/{website}/posts', [PostController::class, 'index']);

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\PostController;
+use App\Http\Controllers\API\WebsiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,5 +16,7 @@ use App\Http\Controllers\API\PostController;
 */
 
 Route::prefix('v1')->group(function () {
-    Route::apiResource('websites.posts', PostController::class)->only('store');
+    Route::apiResource('websites', WebsiteController::class)->only('index');
+    Route::post('websites/{website}/subscribe', [WebsiteController::class, 'subscribe']);
+    Route::apiResource('websites.posts', PostController::class)->only('index', 'store');
 });
